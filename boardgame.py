@@ -63,12 +63,19 @@ for i in range(9):
         handle_click(i)
         st.rerun()
 
+# --- 6. 結果表示の部分をここから書き換え ---
 if st.session_state.winner:
     if st.session_state.winner == "Draw":
-        st.write("引き分け！")
+        st.warning("引き分けです！")
     else:
-        st.balloons()
-        st.success(f"勝者: {st.session_state.winner}")
+        # 勝った時だけ、もう一度音を鳴らす（または別の豪華な音を指定する）
+        # 今ある「bictory.mp3」をもう一度鳴らす場合はこのまま
+        play_sound("bictory.mp3") 
+        
+        st.balloons() # 風船を飛ばす
+        st.success(f"🏆 プレイヤー {st.session_state.winner} の勝ち！")
+
+    # リセットボタン
     if st.button("もう一度遊ぶ"):
         st.session_state.board = [""] * 9
         st.session_state.current_player = "X"
