@@ -1,20 +1,21 @@
 import streamlit as st
 import base64
 
-# --- 音を読み込むための準備（ここがエラーの原因でした） ---
+# --- 音を読み込むための準備（改良版） ---
 def play_sound(file_path):
     try:
         with open(file_path, "rb") as f:
-            data = f.read()  # ここは右にスペースが4つ必要
+            data = f.read()
             b64 = base64.b64encode(data).decode()
+            # 「controls」を追加して、画面に再生バーを出してみる（テスト用）
             md = f"""
-                <audio autoplay="true">
+                <audio autoplay="true" controls style="display:none;">
                 <source src="data:audio/mp3;base64,{b64}" type="audio/mp3">
                 </audio>
                 """
             st.markdown(md, unsafe_allow_html=True)
     except:
-        pass # 音がなくてもエラーで止まらないようにする
+        pass
 
 # --- デザイン（CSS） ---
 st.markdown("""
