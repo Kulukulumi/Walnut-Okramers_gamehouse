@@ -108,8 +108,12 @@ if st.session_state.winner:
         st.warning("引き分けです！")
     else:
         st.success(f"プレイヤー {st.session_state.winner} の勝ち！")
+       
+    if winner:
         play_sound("bictory.mp3")  # ★ここで音を鳴らす！
+        st.balloons()
     
+
     if st.button("もう一度遊ぶ"):
         st.session_state.board = [""] * 9
         st.session_state.current_player = "X"
