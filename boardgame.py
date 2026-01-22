@@ -3,7 +3,8 @@ import base64
 
 # ---音を読み込む準備---
 def play_sound(file_path):
-    with open(file_path, "rb") as f:
+    try:
+        with open(file_path, "rb") as f:
         data = f.read()
         b64 = base64.b64encode(data).decode()
         # javascriptを使ってブラウザに音を鳴らす
@@ -13,7 +14,7 @@ def play_sound(file_path):
             </audio>
             """
 
-st.markdown(md, unsafe_allow_html=True)
+        st.markdown(md, unsafe_allow_html=True)
 
 # 1. ページの設定（タイトルなど）
 st.set_page_config(page_title="ウェブ版 三目並べ", layout="centered")
